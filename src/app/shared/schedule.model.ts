@@ -1,7 +1,7 @@
 //this can be use for display data from db to view
 
 export class Schedule {
-    
+  _id: string = ''; //this can be assign from db
   name: string = '';
   description: string = '';
   mealBreak: string = '';

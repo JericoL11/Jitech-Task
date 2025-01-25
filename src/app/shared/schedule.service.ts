@@ -12,15 +12,20 @@ export class ScheduleService {
   readonly baseUrl = 'http://localhost:3000/schedules/';
   ScheduleList : Schedule[] = []; ///ready to store data from db
 
+  constructor(private fb:FormBuilder,private http: HttpClient ) { }
+
+  
   fetchScheduleList(): Observable<Schedule[]> {
     return this.http.get<Schedule[]>(this.baseUrl);
-
 }
 
-  constructor(private fb:FormBuilder,private http: HttpClient ) { }
+  deleteSchedule(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
 
   //MAIN FORM (copy the model add and past it inside here)
   scheduleForm = this.fb.group({
+    //no need to insert '_id' bcs it will be autog-generate in mongoDb
     name: ['Jane Belaniso'],
     description: [''],
     mealBreak: [''],

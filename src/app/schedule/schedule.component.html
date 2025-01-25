@@ -9,56 +9,79 @@
           <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#scheduleModal">
             Add Schedule
           </button>
-          
         </div>        
       </div>
-  
-      <!------------------------ Filtering --------------------------->
 
-      <!-- <div class="col-12">
+      <div class="col-12">
         <mat-form-field appearance="outline">
+            <mat-label>Search</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Filter schedules" />
+          </mat-form-field>
+      </div>
+     
+      <div class="col-12">
+        <!-- Search Input -->
+        <mat-form-field >
           <mat-label>Search</mat-label>
           <input matInput (keyup)="applyFilter($event)" placeholder="Filter schedules" />
         </mat-form-field>
-      </div> -->
-     
-      <div class="schedule-list">
-        <table class="table table-bordered">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Description</th>
-              <th>Meal Break</th>
-              <th>Flexible Meal</th>
-              <th>Monitor Late</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-             <tr *ngFor="let item of service.ScheduleList">
-              <td>{{ item.name }}</td>
-              <td>{{ item.description }}</td>
-              <td>{{ item.mealBreak }}</td>
-              <td>{{ item.flexMeal ? 'Yes' : 'No' }}</td>
-              <td>{{ item.monitorLate ? 'Yes' : 'No' }}</td>
-              <td> 
-                <!-- Edit button -->
-                <!-- <button class="btn btn-primary btn-sm" (click)="editSchedule(schedule)">
-                  Edit
-                </button> -->
-                <!-- Delete button -->
-                <!-- <button class="btn btn-danger btn-sm" (click)="deleteSchedule(schedule._id)">
-                  Delete
-                </button> -->
-               </td> 
-            </tr> 
-          </tbody>
-        </table>
       </div>
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> 
+      
+      <div class="schedule-list">
+        <!-- Material Table -->
+        <table mat-table [dataSource]="dataSource"  class="mat-elevation-z8">
+      
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let item"> {{ item.name }} </td>
+          </ng-container>
+      
+          <!-- Description Column -->
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <td mat-cell *matCellDef="let item"> {{ item.description }} </td>
+          </ng-container>
+      
+          <!-- Meal Break Column -->
+          <ng-container matColumnDef="mealBreak">
+            <th mat-header-cell *matHeaderCellDef> Meal Break </th>
+            <td mat-cell *matCellDef="let item"> {{ item.mealBreak }} </td>
+          </ng-container>
+      
+          <!-- Flexible Meal Column -->
+          <ng-container matColumnDef="flexMeal">
+            <th mat-header-cell *matHeaderCellDef> Flexible Meal </th>
+            <td mat-cell *matCellDef="let item"> {{ item.flexMeal ? 'Yes' : 'No' }} </td>
+          </ng-container>
+      
+          <!-- Monitor Late Column -->
+          <ng-container matColumnDef="monitorLate">
+            <th mat-header-cell *matHeaderCellDef> Monitor Late </th>
+            <td mat-cell *matCellDef="let item"> {{ item.monitorLate ? 'Yes' : 'No' }} </td>
+          </ng-container>
+      
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <td mat-cell *matCellDef="let item">
+              <button mat-button color="warn" (click)="deleteSchedule(item._id)">Delete</button>
+            </td>
+          </ng-container>
+      
+          <!-- Table Headers and Rows -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      
+      <!-- Paginator -->
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      
     </div>
-    
   </div>
+</div>
 
-  <!-- for modal display -->
-  <app-add-modal></app-add-modal>
+<!-- open modal -->
+<app-add-modal></app-add-modal>
+      
+ 
