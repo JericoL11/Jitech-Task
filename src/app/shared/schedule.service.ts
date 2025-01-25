@@ -18,7 +18,7 @@ export class ScheduleService {
   //MAIN FORM (copy the model add and past it inside here)
   this.scheduleForm = this.fb.group({
     schedName: ['', Validators.required],
-    description: ['Dev', Validators.required],
+    description: ['', Validators.required],
     mealBreak: ['', Validators.required],
     flexMeal: ['', Validators.required],
     monitorLate: ['', Validators.required],

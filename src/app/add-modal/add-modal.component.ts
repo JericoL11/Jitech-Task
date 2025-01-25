@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ScheduleService } from '../shared/schedule.service';  
-import { Schedule } from '../shared/schedule.model';
+import { ScheduleComponent } from '../schedule/schedule.component';
+
 declare var bootstrap: any; // Declare Bootstrap as a global variable
 
 @Component({
@@ -9,7 +10,7 @@ declare var bootstrap: any; // Declare Bootstrap as a global variable
   styleUrls: ['./add-modal.component.css']
 })
 export class AddModalComponent {
-  constructor(public service:ScheduleService,) { }
+  constructor(public service:ScheduleService, public sched:ScheduleComponent) { }
 
   onSubmit() {
     console.log('Form Values:', this.service.scheduleForm.value); // Debugging: Check form values
@@ -22,6 +23,7 @@ export class AddModalComponent {
           console.log('Schedule created successfully:', response);
           alert('Schedule saved successfully!');
           this.closeModal(); // Close the modal after success
+          this.sched.loadSchedules();
         },
         error: (error) => {
           console.error('Error creating schedule:', error);
