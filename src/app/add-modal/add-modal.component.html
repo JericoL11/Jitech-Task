@@ -1,0 +1,637 @@
+ <!-- modal -->
+ <div class="modal fade" id="scheduleModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <form [formGroup]="service.scheduleForm" (submit)="onSubmit()">
+          <div class="modal-header">
+            <h5 class="modal-title">Add Schedule</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="modal-body">
+              <div class="row">
+                <!-- Name Field -->
+                <div class="col-2">
+                  <div class="mb-3">
+                    <label for="name" class="form-label"><small>Name</small></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="name"
+                      formControlName="name"
+                      placeholder="Enter schedule name"
+                      required
+                    />
+                    <!-- <div
+                      *ngIf="scheduleForm.get('name')?.invalid && scheduleForm.get('name')?.touched"
+                      class="text-danger">
+                      Name is required.
+                    </div> -->
+                  </div>
+                </div>
+            
+                <!-- Description Field -->
+                <div class="col-2">
+                  <div class="mb-3">
+                    <label for="description" class="form-label"><small>Schedule Description</small></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="description"
+                      formControlName="description"
+                      placeholder="Enter schedule description"
+                      required
+                    />
+                    <!-- <div
+                      *ngIf="scheduleForm.get('description')?.invalid && scheduleForm.get('description')?.touched"
+                      class="text-danger"><small>
+                      Description is required.</small>
+                    </div> -->
+                  </div>
+                </div>
+
+
+                <div class="col-2">
+                  <div class="mb-3">
+                    <label for="mealBreak" class="form-label"><small>Meal Break Required</small> <span class="text-danger">*</span></label>
+                    <select
+                      id="mealBreak"
+                      class="form-select"
+                      formControlName="mealBreak"
+                      required>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-2">
+                  <div class="mb-3">
+                    <label for="flexMeal" class="form-label"><small>Flexible Meal Break</small> <span class="text-danger">*</span></label>
+                    <select
+                      id="flexMeal"
+                      class="form-select"
+                      formControlName="flexMeal">
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
+
+
+                <!-- Monitor Late Field -->
+                <div class="col-2">
+                  <div class="mb-3">
+                    <label for="monitorLate" class="form-label"><small>Monitor Late</small></label>
+                    <select
+                      id="monitorLate"
+                      class="form-select"
+                      formControlName="monitorLate">
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="col-1">
+                  <div class="mb-3">
+                    <label for="grace" class="form-label"><small>Grace</small></label>
+                    <input
+                      type="number"
+                      id="grace"
+                      class="form-control"
+                      formControlName="grace"
+                      min="0"
+                      required
+                    />
+                  </div>
+                </div>
+
+
+                <div class="col-1">
+                  <div class="mb-3">
+                    <label for="requestable" class="form-label"><small>Requestable</small></label>
+                    <select
+                      id="requestable"
+                      class="form-select"
+                      formControlName="requestable"
+                      required>
+                      <option value="Yes">Yes</option>
+                      <option value="No">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+          <!-- row names -->
+              <div _ngcontent-psq-c261="" class="row mt-4">
+                <div  class="col-1"><small>Day</small></div>
+                <div  class="col-1"><small>Rest Day</small></div>
+                <div  class="col-2"><small>In<span  class="text-danger">*</span><span class="ng-star-inserted">/PTI?</span></small></div>
+                <div  class="col-2"><small>Meal Out<span  class="text-danger">*</span>/Next Day?</small></div>
+                <div  class="col-2"><small>Meal In<span class="text-danger">*</span>/Next Day?</small></div>
+                <div  class="col-2"><small>Out<span  class="text-danger">*</span>/Next Day?</small></div>
+                <div  class="col-2"><small>Hours/Day<span class="text-danger">*</span></small></div></div>
+            </div>
+            
+            <!-- WEEK SECTIONS -->
+            <section class="px-2">
+            <!-- Sunday -->
+            <div class="row">
+              <div class="col-1 mt-3">
+                <div>Sunday</div>
+              </div>
+
+              <!-- RestDay -->
+              <div class="col-1 mt-2">
+                <mat-checkbox color="primary" formControlName="restDaySunday" style="padding-top: 3px;"> </mat-checkbox>
+              </div>
+
+              <!-- In/PTI? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="inSunday" id="inSunday" class="form-control">
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="inPTISunday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+              
+              <!-- Meal Out/Next Day? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="mealOutSunday" id="mealOutSunday" class="form-control" >
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="nextDayMealOutSunday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Meal In/Next Day? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="mealInSunday" id="mealInSunday" class="form-control" >
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="nextDayMealInSunday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Out/Next Day? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="outSunday" id="outSunday" class="form-control" >
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="nextDayOutSunday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <input type="number" formControlName="totalHrsSunday" class="form-control">
+                </div>
+              </div>
+            </div>
+
+
+            <!-- Monday -->
+            <div class="row">
+              <div class="col-1 mt-3">
+                <div>Monday</div>
+              </div>
+
+              <!-- RestDay -->
+              <div class="col-1 mt-2">
+                <mat-checkbox color="primary" formControlName="restDayMonday" style="padding-top: 3px;"> </mat-checkbox>
+              </div>
+
+              <!-- In/PTI? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="inMonday" id="inMonday" class="form-control">
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="inPTIMonday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Meal Out/Next Day? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="mealOutMonday" id="mealOutMonday" class="form-control">
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="nextDayMealOutMonday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Meal In/Next Day? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="mealInMonday" id="mealInMonday" class="form-control">
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="nextDayMealInMonday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Out/Next Day? -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <span style="flex: 1; margin-right: 5px;">
+                    <input type="time" formControlName="outMonday" id="outMonday" class="form-control">
+                  </span>
+                  <span>
+                    <mat-checkbox color="primary" formControlName="nextDayOutMonday"></mat-checkbox>
+                  </span>
+                </div>
+              </div>
+
+              <!-- Total Hours -->
+              <div class="col-2 mt-2">
+                <div style="display: flex; align-items: center;">
+                  <input type="number" formControlName="totalHrsMonday" class="form-control">
+                </div>
+              </div>
+            </div>
+
+            
+
+            <!-- Tuesday -->
+              <div class="row">
+                <div class="col-1 mt-3">
+                  <div>Tuesday</div>
+                </div>
+
+                <!-- RestDay -->
+                <div class="col-1 mt-2">
+                  <mat-checkbox color="primary" formControlName="restDayTuesday" style="padding-top: 3px;"> </mat-checkbox>
+                </div>
+
+                <!-- In/PTI? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="inTuesday" id="inTuesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="inPTITuesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealOutTuesday" id="mealOutTuesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealOutTuesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal In/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealInTuesday" id="mealInTuesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealInTuesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="outTuesday" id="outTuesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayOutTuesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Total Number Hours -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <input type="number" formControlName="totalHrsTuesday" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+
+
+           <!-- Wednesday -->
+              <div class="row">
+                <div class="col-1 mt-3">
+                  <div>Wednesday</div>
+                </div>
+
+                <!-- RestDay -->
+                <div class="col-1 mt-2">
+                  <mat-checkbox color="primary" formControlName="restDayWednesday" style="padding-top: 3px;"></mat-checkbox>
+                </div>
+
+                <!-- In/PTI? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="inWednesday" id="inWednesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="inPTIWednesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealOutWednesday" id="mealOutWednesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealOutWednesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal In/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealInWednesday" id="mealInWednesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealInWednesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="outWednesday" id="outWednesday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayOutWednesday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Total Number Hours -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <input type="number" formControlName="totalHrsWednesday" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+
+            <!-- Thursday -->
+              <div class="row">
+                <div class="col-1 mt-3">
+                  <div>Thursday</div>
+                </div>
+
+                <!-- RestDay -->
+                <div class="col-1 mt-2">
+                  <mat-checkbox color="primary" formControlName="restDayThursday" style="padding-top: 3px;">
+                   
+                  </mat-checkbox>
+                </div>
+
+                <!-- In/PTI? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="inThursday" id="inThursday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="inPTIThursday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealOutThursday" id="mealOutThursday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealOutThursday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal In/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealInThursday" id="mealInThursday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealInThursday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="outThursday" id="outThursday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayOutThursday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Total Number Hours -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <input type="number" formControlName="totalHrsThursday" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+            
+
+           <!-- Friday -->
+              <div class="row">
+                <div class="col-1 mt-3">
+                  <div>Friday</div>
+                </div>
+
+                <!-- RestDay -->
+                <div class="col-1 mt-2">
+                  <mat-checkbox color="primary" formControlName="restDayFriday" style="padding-top: 3px;"></mat-checkbox>
+                </div>
+
+                <!-- In/PTI? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="inFriday" id="inFriday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="inPTIFriday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealOutFriday" id="mealOutFriday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealOutFriday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal In/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealInFriday" id="mealInFriday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealInFriday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="outFriday" id="outFriday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayOutFriday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Total Number Hours -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <input type="number" formControlName="totalHrsFriday" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+
+
+            <!-- Saturday -->
+              <div class="row">
+                <div class="col-1 mt-3">
+                  <div>Saturday</div>
+                </div>
+
+                <!-- RestDay -->
+                <div class="col-1 mt-2">
+                  <mat-checkbox color="primary" formControlName="restDaySaturday" style="padding-top: 3px;"></mat-checkbox>
+                </div>
+
+                <!-- In/PTI? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="inSaturday" id="inSaturday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="inPTISaturday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealOutSaturday" id="mealOutSaturday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealOutSaturday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Meal In/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="mealInSaturday" id="mealInSaturday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayMealInSaturday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Out/Next Day? -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <span style="flex: 1; margin-right: 5px;">
+                      <input type="time" formControlName="outSaturday" id="outSaturday" class="form-control">
+                    </span>
+                    <span>
+                      <mat-checkbox color="primary" formControlName="nextDayOutSaturday"></mat-checkbox>
+                    </span>
+                  </div>
+                </div>
+
+                <!-- Total Number Hours -->
+                <div class="col-2 mt-2">
+                  <div style="display: flex; align-items: center;">
+                    <input type="number" formControlName="totalHrsSaturday" class="form-control">
+                  </div>
+                </div>
+              </div>
+
+          </section>
+          </div>
+
+          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <!-- <button type="submit" class="btn btn-primary" [disabled]="scheduleForm.invalid">
+              {{ isEdit ? 'Save Changes' : 'Add Schedule' }}
+            </button> -->
+
+            <button type="submit" class="btn btn-primary">
+               Save
+              </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
