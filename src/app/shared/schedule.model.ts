@@ -2,7 +2,7 @@
 
 export class Schedule {
   _id: string = ''; //this can be assign from db
-  name: string = '';
+  schedName: string = '';
   description: string = '';
   mealBreak: string = '';
   flexMeal: string = '';

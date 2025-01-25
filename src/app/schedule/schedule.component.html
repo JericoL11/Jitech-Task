@@ -19,13 +19,6 @@
           </mat-form-field>
       </div>
      
-      <div class="col-12">
-        <!-- Search Input -->
-        <mat-form-field >
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Filter schedules" />
-        </mat-form-field>
-      </div>
       
       <div class="schedule-list">
         <!-- Material Table -->
@@ -34,7 +27,7 @@
           <!-- Name Column -->
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef> Name </th>
-            <td mat-cell *matCellDef="let item"> {{ item.name }} </td>
+            <td mat-cell *matCellDef="let item"> {{ item.schedName }} </td>
           </ng-container>
       
           <!-- Description Column -->
@@ -80,6 +73,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- open modal -->
 <app-add-modal></app-add-modal>

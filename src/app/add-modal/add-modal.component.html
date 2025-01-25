@@ -2,45 +2,44 @@
  <div class="modal fade" id="scheduleModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
-        <form [formGroup]="service.scheduleForm" (submit)="onSubmit()">
+        <form [formGroup]="service.scheduleForm" (ngSubmit)="onSubmit()">
           <div class="modal-header">
             <h5 class="modal-title">Add Schedule</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <div class="modal-body">
               <div class="row">
-                <!-- Name Field -->
-                <div class="col-2">
-                  <div class="mb-3">
-                    <label for="name" class="form-label"><small>Name</small></label>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="name"
-                      formControlName="name"
-                      placeholder="Enter schedule name"
-                      required
-                    />
-                    <!-- <div
-                      *ngIf="scheduleForm.get('name')?.invalid && scheduleForm.get('name')?.touched"
-                      class="text-danger">
-                      Name is required.
-                    </div> -->
-                  </div>
-                </div>
-            
+              
                 <!-- Description Field -->
                 <div class="col-2">
                   <div class="mb-3">
-                    <label for="description" class="form-label"><small>Schedule Description</small></label>
+                    <label for="schedName" class="form-label"><small>schedName</small></label>
                     <input
                       type="text"
                       class="form-control"
-                      id="description"
-                      formControlName="description"
+                      id="schedName"
+                      formControlName="schedName"
+                      placeholder="Enter schedule schedName"
+                 
+                    />
+                    <!-- <div
+                      *ngIf="scheduleForm.get('description')?.invalid && scheduleForm.get('description')?.touched"
+                      class="text-danger"><small>
+                      Description is required.</small>
+                    </div> -->
+                  </div>
+                </div>
+
+                <div class="col-2">
+                  <div class="mb-3">
+                    <label for="schedName" class="form-label"><small>Schedule Name</small></label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="schedName"
+                      formControlName="schedName"
                       placeholder="Enter schedule description"
-                      required
+                      
                     />
                     <!-- <div
                       *ngIf="scheduleForm.get('description')?.invalid && scheduleForm.get('description')?.touched"
@@ -58,7 +57,7 @@
                       id="mealBreak"
                       class="form-select"
                       formControlName="mealBreak"
-                      required>
+                      >
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
@@ -102,7 +101,7 @@
                       class="form-control"
                       formControlName="grace"
                       min="0"
-                      required
+                      
                     />
                   </div>
                 </div>
@@ -115,7 +114,7 @@
                       id="requestable"
                       class="form-select"
                       formControlName="requestable"
-                      required>
+                      >
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
@@ -132,7 +131,7 @@
                 <div  class="col-2"><small>Meal In<span class="text-danger">*</span>/Next Day?</small></div>
                 <div  class="col-2"><small>Out<span  class="text-danger">*</span>/Next Day?</small></div>
                 <div  class="col-2"><small>Hours/Day<span class="text-danger">*</span></small></div></div>
-            </div>
+              </div>
             
             <!-- WEEK SECTIONS -->
             <section class="px-2">
@@ -617,7 +616,7 @@
               </div>
 
           </section>
-          </div>
+
 
           
           <div class="modal-footer">

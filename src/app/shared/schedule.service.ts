@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Schedule } from './schedule.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -11,28 +11,19 @@ import { Observable } from 'rxjs';
 export class ScheduleService {
   readonly baseUrl = 'http://localhost:3000/schedules/';
   ScheduleList : Schedule[] = []; ///ready to store data from db
+  scheduleForm: FormGroup;
 
-  constructor(private fb:FormBuilder,private http: HttpClient ) { }
-
-  
-  fetchScheduleList(): Observable<Schedule[]> {
-    return this.http.get<Schedule[]>(this.baseUrl);
-}
-
-  deleteSchedule(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
-  }
+  constructor(private fb:FormBuilder,private http: HttpClient ) { 
 
   //MAIN FORM (copy the model add and past it inside here)
-  scheduleForm = this.fb.group({
-    //no need to insert '_id' bcs it will be autog-generate in mongoDb
-    name: ['Jane Belaniso'],
-    description: [''],
-    mealBreak: [''],
-    flexMeal: [''],
-    monitorLate: [''],
-    grace: [''],
-    requestable: [''],
+  this.scheduleForm = this.fb.group({
+    schedName: ['', Validators.required],
+    description: ['Dev', Validators.required],
+    mealBreak: ['', Validators.required],
+    flexMeal: ['', Validators.required],
+    monitorLate: ['', Validators.required],
+    grace: ['', [Validators.required, Validators.min(0)]],
+    requestable: ['', Validators.required],
   
     restDaySunday: [false],
     restDayMonday: [false],
@@ -42,13 +33,13 @@ export class ScheduleService {
     restDayFriday: [false],
     restDaySaturday: [false],
   
-    inSunday: [''],
-    inMonday: [''],
-    inTuesday: [''],
-    inWednesday: [''],
-    inThursday: [''],
-    inFriday: [''],
-    inSaturday: [''],
+    inSunday: ['10:00', Validators.required],
+    inMonday: ['08:00', Validators.required],
+    inTuesday: ['08:00', Validators.required],
+    inWednesday: ['08:00', Validators.required],
+    inThursday: ['08:00', Validators.required],
+    inFriday: ['08:00', Validators.required],
+    inSaturday: ['08:00', Validators.required],
   
     inPTISunday: [false],
     inPTIMonday: [false],
@@ -58,13 +49,13 @@ export class ScheduleService {
     inPTIFriday: [false],
     inPTISaturday: [false],
   
-    mealOutSunday: [''],
-    mealOutMonday: [''],
-    mealOutTuesday: [''],
-    mealOutWednesday: [''],
-    mealOutThursday: [''],
-    mealOutFriday: [''],
-    mealOutSaturday: [''],
+    mealOutSunday: ['02:00', Validators.required],
+    mealOutMonday: ['02:00', Validators.required],
+    mealOutTuesday: ['02:00', Validators.required],
+    mealOutWednesday: ['02:00', Validators.required],
+    mealOutThursday: ['02:00', Validators.required],
+    mealOutFriday: ['02:00', Validators.required],
+    mealOutSaturday: ['02:00', Validators.required],
   
     nextDayMealOutSunday: [false],
     nextDayMealOutMonday: [false],
@@ -74,13 +65,13 @@ export class ScheduleService {
     nextDayMealOutFriday: [false],
     nextDayMealOutSaturday: [false],
   
-    mealInSunday: [''],
-    mealInMonday: [''],
-    mealInTuesday: [''],
-    mealInWednesday: [''],
-    mealInThursday: [''],
-    mealInFriday: [''],
-    mealInSaturday: [''],
+    mealInSunday: ['01:00', Validators.required],
+    mealInMonday: ['01:00', Validators.required],
+    mealInTuesday: ['01:00', Validators.required],
+    mealInWednesday: ['01:00', Validators.required],
+    mealInThursday: ['01:00', Validators.required],
+    mealInFriday: ['01:00', Validators.required],
+    mealInSaturday: ['01:00', Validators.required],
   
     nextDayMealInSunday: [false],
     nextDayMealInMonday: [false],
@@ -90,13 +81,13 @@ export class ScheduleService {
     nextDayMealInFriday: [false],
     nextDayMealInSaturday: [false],
   
-    outSunday: [''],
-    outMonday: [''],
-    outTuesday: [''],
-    outWednesday: [''],
-    outThursday: [''], 
-    outFriday: [''],
-    outSaturday: [''],
+    outSunday: ['05:00', Validators.required],
+    outMonday: ['05:00', Validators.required],
+    outTuesday: ['05:00', Validators.required],
+    outWednesday: ['05:00', Validators.required],
+    outThursday: ['05:00', Validators.required],
+    outFriday: ['05:00', Validators.required],
+    outSaturday: ['05:00', Validators.required],
   
     nextDayOutSunday: [false],
     nextDayOutMonday: [false],
@@ -106,12 +97,27 @@ export class ScheduleService {
     nextDayOutFriday: [false],
     nextDayOutSaturday: [false],
   
-    totalHrsSunday: [''],
-    totalHrsMonday: [''],
-    totalHrsTuesday: [''],
-    totalHrsWednesday: [''],
-    totalHrsThursday: [''],
-    totalHrsFriday: [''],
-    totalHrsSaturday: [''],
+    totalHrsSunday: ['7', Validators.required],
+    totalHrsMonday: ['8', Validators.required],
+    totalHrsTuesday: ['8', Validators.required],
+    totalHrsWednesday: ['8', Validators.required],
+    totalHrsThursday: ['8', Validators.required],
+    totalHrsFriday: ['8', Validators.required],
+    totalHrsSaturday: ['8', Validators.required],
   });
+  
+  }
+
+  fetchScheduleList(): Observable<Schedule[]> {
+    return this.http.get<Schedule[]>(this.baseUrl);
+}
+
+  createSchedule(schedule: any): Observable<any>{
+    return this.http.post(this.baseUrl, schedule)
+  };
+
+  deleteSchedule(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
 }
