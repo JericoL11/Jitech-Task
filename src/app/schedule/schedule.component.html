@@ -6,7 +6,12 @@
     
       <div class="col-12">
         <div class="d-flex justify-content-end">
-          <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#scheduleModal">
+         <!-- Add Schedule Button -->
+          <button 
+            class="btn btn-primary mb-3" 
+            (click)="openAddModal()" 
+            data-bs-toggle="modal" 
+            data-bs-target="#scheduleModal">
             Add Schedule
           </button>
         </div>        
@@ -57,9 +62,19 @@
           <!-- Actions Column -->
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
-            <td mat-cell *matCellDef="let item">
-              <button mat-button color="warn" (click)="deleteSchedule(item._id)">Delete</button>
-            </td>
+            
+              <td mat-cell *matCellDef="let item">
+                <!-- Edit Schedule Button -->
+                  <button 
+                  mat-button 
+                  color="warn" 
+                  (click)="openEditModal(item)" 
+                  data-bs-toggle="modal" 
+                  data-bs-target="#scheduleModal">
+                  Edit
+                  </button>
+                <button mat-button color="warn" (click)="deleteSchedule(item._id)">Delete</button>
+              </td>
           </ng-container>
       
           <!-- Table Headers and Rows -->
@@ -76,6 +91,7 @@
 
 
 <!-- open modal -->
-<app-add-modal></app-add-modal>
-      
- 
+<app-add-modal 
+  [isEdit]="isEdit" 
+  [schedule]="selectedSchedule" >
+</app-add-modal>

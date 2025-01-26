@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddModalComponent } from '../add-modal/add-modal.component';
 
 @Component({
   selector: 'app-schedule',
@@ -16,6 +17,10 @@ export class ScheduleComponent{
   // ScheduleList : Schedule[] = []; ///ready to store data from db
   displayedColumns: string[] = ['name', 'description', 'mealBreak', 'flexMeal', 'monitorLate', 'actions'];
   dataSource = new MatTableDataSource<Schedule>(); //for filtering
+
+  //modal
+  selectedSchedule: any = null; // Holds the schedule to edit
+  isEdit: boolean = false; // Tracks add or edit mode
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -37,6 +42,7 @@ loadSchedules(): void {
   this.service.fetchScheduleList().subscribe(
     (data) => {
       this.dataSource.data = data;
+      
       console.log('Fetched schedules:', this.dataSource.data);
     },
     (error) => {
@@ -53,5 +59,20 @@ deleteSchedule(id: string) {
   }
 }
 
+//Modal Options
+openAddModal(): void {
+  this.isEdit = false;
+  this.selectedSchedule = null;
+   // Reset the form with default values
+   this.service.resetForm();
+}
+
+openEditModal(schedule: any): void {
+  this.isEdit = true;
+  this.selectedSchedule = schedule;
+  this.service.scheduleForm.patchValue(schedule);
+
+
+}
 
 }
