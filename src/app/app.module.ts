@@ -29,13 +29,15 @@ import {MatTreeModule} from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { AddModalComponent } from './add-modal/add-modal.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ScheduleComponent,
-    AddModalComponent
+    AddModalComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

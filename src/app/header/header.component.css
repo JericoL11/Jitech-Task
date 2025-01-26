@@ -1,0 +1,11 @@
+.nav-link{
+    color:white;
+}
+.nav-link:hover{
+    color:gold;
+    font-weight: bold;
+}
+
+.card-header{
+    text-align: center;
+}

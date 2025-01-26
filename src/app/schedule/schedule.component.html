@@ -8,11 +8,11 @@
         <div class="d-flex justify-content-end">
          <!-- Add Schedule Button -->
           <button 
-            class="btn btn-primary mb-3" 
+            class="btn mb-2" 
             (click)="openAddModal()" 
             data-bs-toggle="modal" 
             data-bs-target="#scheduleModal">
-            Add Schedule
+            <mat-icon class="outlined-icon">add</mat-icon>
           </button>
         </div>        
       </div>
@@ -31,49 +31,44 @@
       
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <th mat-header-cell *matHeaderCellDef><small> Name </small></th>
             <td mat-cell *matCellDef="let item"> {{ item.schedName }} </td>
           </ng-container>
       
           <!-- Description Column -->
           <ng-container matColumnDef="description">
-            <th mat-header-cell *matHeaderCellDef> Description </th>
+            <th mat-header-cell *matHeaderCellDef><small> Description</small> </th>
             <td mat-cell *matCellDef="let item"> {{ item.description }} </td>
           </ng-container>
       
           <!-- Meal Break Column -->
           <ng-container matColumnDef="mealBreak">
-            <th mat-header-cell *matHeaderCellDef> Meal Break </th>
+            <th mat-header-cell *matHeaderCellDef><small> Meal Break Required</small> </th>
             <td mat-cell *matCellDef="let item"> {{ item.mealBreak }} </td>
           </ng-container>
       
           <!-- Flexible Meal Column -->
           <ng-container matColumnDef="flexMeal">
-            <th mat-header-cell *matHeaderCellDef> Flexible Meal </th>
+            <th mat-header-cell *matHeaderCellDef> <small>Flexible Meal Break </small></th>
             <td mat-cell *matCellDef="let item"> {{ item.flexMeal ? 'Yes' : 'No' }} </td>
           </ng-container>
       
           <!-- Monitor Late Column -->
           <ng-container matColumnDef="monitorLate">
-            <th mat-header-cell *matHeaderCellDef> Monitor Late </th>
+            <th mat-header-cell *matHeaderCellDef><small>Don't Monitor Late</small></th>
             <td mat-cell *matCellDef="let item"> {{ item.monitorLate ? 'Yes' : 'No' }} </td>
           </ng-container>
       
           <!-- Actions Column -->
           <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <th mat-header-cell *matHeaderCellDef><small> Actions</small> </th>
             
               <td mat-cell *matCellDef="let item">
                 <!-- Edit Schedule Button -->
-                  <button 
-                  mat-button 
-                  color="warn" 
-                  (click)="openEditModal(item)" 
-                  data-bs-toggle="modal" 
-                  data-bs-target="#scheduleModal">
-                  Edit
+                  <button mat-button  color="primary" (click)="openEditModal(item)" data-bs-toggle="modal"  data-bs-target="#scheduleModal">
+                    <mat-icon>edit</mat-icon>
                   </button>
-                <button mat-button color="warn" (click)="deleteSchedule(item._id)">Delete</button>
+                <button mat-button color="warn" (click)="deleteSchedule(item._id)"> <mat-icon>delete</mat-icon></button>
               </td>
           </ng-container>
       

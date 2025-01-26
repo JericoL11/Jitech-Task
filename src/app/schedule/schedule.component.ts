@@ -22,10 +22,17 @@ export class ScheduleComponent{
   selectedSchedule: any = null; // Holds the schedule to edit
   isEdit: boolean = false; // Tracks add or edit mode
 
+//sorting
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  ngAfterViewInit(): void {
+    // Connect paginator and sort to the dataSource
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
+  
 //inject schedule service class
 constructor(public service:ScheduleService, private http: HttpClient){}
 
@@ -39,16 +46,15 @@ applyFilter(event: Event): void {
 }
 
 loadSchedules(): void {
-  this.service.fetchScheduleList().subscribe(
-    (data) => {
+  this.service.fetchScheduleList().subscribe({
+    next: (data) => {
       this.dataSource.data = data;
-      
       console.log('Fetched schedules:', this.dataSource.data);
     },
-    (error) => {
+    error: (error) => {
       console.error('Error fetching schedules:', error);
-    }
-  );
+    },
+  });
 }
 
 deleteSchedule(id: string) {

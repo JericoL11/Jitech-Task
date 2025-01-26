@@ -9,12 +9,13 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ScheduleService {
+
   readonly baseUrl = 'http://localhost:3000/schedules/';
-  ScheduleList : Schedule[] = []; ///ready to store data from db
   scheduleForm: FormGroup;
 
-
+//main defaultvalues
   readonly defaultValues = {
+    _id: null,
     schedName: '',
     description: '',
     mealBreak: '',
@@ -206,14 +207,14 @@ export class ScheduleService {
 
   fetchScheduleList(): Observable<Schedule[]> {
     return this.http.get<Schedule[]>(this.baseUrl);
-}
+  }
 
   createSchedule(schedule: any): Observable<any>{
     return this.http.post(this.baseUrl, schedule)
   };
 
   updateSchedule(id: string, schedule: any) {
-    return this.http.put(`${this.baseUrl}/${id}`, schedule); // Update API endpoint
+    return this.http.put(`${this.baseUrl}/${id}`, schedule); 
   }
   
   deleteSchedule(id: string): Observable<any> {
