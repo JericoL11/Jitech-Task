@@ -13,14 +13,18 @@
                 <!-- NAme Field -->
                 <div class="col-2">
                   <div class="mb-3">
-                    <label for="schedName" class="form-label"><small>schedName</small></label>
+                    <label for="schedName" class="form-label"><small>Schedule Name</small></label>
                     <input
                       type="text"
                       class="form-control"
                       id="schedName"
                       formControlName="schedName"
                       placeholder=""/>
-               
+                      <div 
+                      *ngIf="service.scheduleForm.get('schedName')?.invalid && service.scheduleForm.get('schedName')?.touched"
+                      class="text-danger">
+                       Required
+                      </div>
                   </div>
                 </div>
 
@@ -34,6 +38,11 @@
                       id="description"
                       formControlName="description"
                       placeholder=""/>
+                      <div
+                      *ngIf="service.scheduleForm.get('description')?.invalid && service.scheduleForm.get('description')?.touched"
+                      class="text-danger">
+                      Required
+                    </div>
                   </div>
                 </div>
 
@@ -43,11 +52,12 @@
                     <select
                       id="mealBreak"
                       class="form-select"
-                      formControlName="mealBreak"
-                      >
+                      formControlName="mealBreak">
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <div *ngIf="service.scheduleForm.get('mealBreak')?.invalid && service.scheduleForm.get('mealBreak')?.touched"
+                    class="text-danger">Required</div>
                   </div>
                 </div>
 
@@ -61,6 +71,8 @@
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <div *ngIf="service.scheduleForm.get('flexMeal')?.invalid && service.scheduleForm.get('flexMeal')?.touched"
+                    class="text-danger">Required</div>
                   </div>
                 </div>
 
@@ -76,6 +88,8 @@
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <div *ngIf="service.scheduleForm.get('monitorLate')?.invalid && service.scheduleForm.get('monitorLate')?.touched"
+                    class="text-danger">Required</div>
                   </div>
                 </div>
                 
@@ -90,6 +104,8 @@
                       min="0"
                       
                     />
+                    <div *ngIf="service.scheduleForm.get('grace')?.invalid && service.scheduleForm.get('grace')?.touched"
+                    class="text-danger">Required</div>
                   </div>
                 </div>
 
@@ -105,6 +121,8 @@
                       <option value="Yes">Yes</option>
                       <option value="No">No</option>
                     </select>
+                    <div *ngIf="service.scheduleForm.get('requestable')?.invalid && service.scheduleForm.get('requestable')?.touched"
+                    class="text-danger">Required</div>
                   </div>
                 </div>
               </div>
@@ -611,7 +629,7 @@
             <!-- <button type="submit" class="btn btn-primary" [disabled]="scheduleForm.invalid">
               {{ isEdit ? 'Save Changes' : 'Add Schedule' }}
             </button> -->
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" [disabled]="service.scheduleForm.invalid">
               {{ isEdit ? 'Save Changes' : 'Add Schedule' }}
             </button>
           
